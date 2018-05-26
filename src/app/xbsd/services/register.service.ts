@@ -6,7 +6,6 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {ApiRequestService} from './api-request.service';
-import {logger} from "codelyzer/util/logger";
 import {UserInfoService} from './user-info.service';
 
 export interface RegisterRequestParam {
@@ -39,12 +38,10 @@ export class RegisterService {
             .post('api/auth/register', bodyData) //
             .subscribe(jsonResp => {
                     if (jsonResp === undefined || jsonResp === null) {
-                        logger.error('jsonResp null' + jsonResp);
                         registerDataSubject.error(new Error("jsonResp null"));
                         return;
                     }
                     if (jsonResp.code != 0) {
-                        logger.error('jsonResp err' + jsonResp);
                         registerDataSubject.error(new Error("jsonResp err: " + jsonResp.message));
                         return;
                     }
