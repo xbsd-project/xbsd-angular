@@ -19,6 +19,7 @@ import { FireBaseComponentsModule } from './shared/firebase.module';
 
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import {XbsdModule} from './xbsd/xbsd.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,9 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     FireBaseComponentsModule,
     ReactiveFormsModule,
-    environment['ngsw'] ? ServiceWorkerModule.register('./ngsw-worker.js') : []
+    environment['ngsw'] ? ServiceWorkerModule.register('./ngsw-worker.js') : [],
+
+    XbsdModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
