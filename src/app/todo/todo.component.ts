@@ -3,6 +3,7 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 import {Todo} from './todo.model';
 
 import {Subscription} from 'rxjs';
+import {TodoService} from './todo.service';
 
 @Component({
   selector: 'app-todo',
@@ -15,14 +16,15 @@ export class TodoComponent implements OnInit, OnDestroy {
   todos: Todo[];
   onTodosChangedSubscrition: Subscription;
 
-  constructor(@Inject('todoService') private service,
+  constructor(@Inject('todoService') private service: TodoService,
               private router: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.service.getTodosByParams();
+    this.service.getRecords();
     this.onTodosChangedSubscrition = this.service.onTodosChangedSubject.subscribe((todo) => {
-      this.todos = todo;
+      console.log(todo.items);
+      this.todos = todo.items;
     });
   }
 

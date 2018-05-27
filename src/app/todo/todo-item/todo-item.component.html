@@ -4,13 +4,16 @@
   <mat-checkbox class="m-r-16" fxFlex="0 1 auto" (click)="toggle(todo)"></mat-checkbox>
 
   <div class="item" fxLayout="row" fxLayoutAlign="start center" fxFlex>
-    <div [ngClass]="{'completed':todo.completed}" fxLayout="column" fxFlex>
-      <div class="title">{{ todo.title }}</div>
-      <div class="notes">{{ todo?.notes }}</div>
+    <div [ngClass]="{'completed':false}" fxLayout="column" fxFlex>
+      <div class="title">{{ todo.nickname }}</div>
+      <div class="title">{{ todo.birthdayString }}</div>
+      <div class="title">{{ todo.nextBirthdayString }}</div>
+      <!--<div class="notes">{{ todo.birthdayString }}</div>-->
+      <!--<div class="notes">{{ todo.nextBirthdayString }}</div>-->
       <div class="tags" fxLayout="row wrap" fxLayoutAlign="start center">
         <div class="tag" fxLayout="row" fxLayoutAlign="start center">
           <div class="tag-color" style="background-color: rgb(56, 142, 60);"></div>
-          <div class="tag-label">前端</div>
+          <div class="tag-label">{{todo.birthdayType}}</div>
         </div>
       </div>
     </div>

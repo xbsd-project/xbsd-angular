@@ -1,8 +1,8 @@
 export class Todo {
   id: string;
-  title: string;
-  notes: string;
-  startDate: string;
-  endDate: string;
-  completed: boolean;
+  email: string;
+  birthdayType: string;
+  nickname: string;
+  birthdayString: string;
+  nextBirthdayString: boolean;
 }
