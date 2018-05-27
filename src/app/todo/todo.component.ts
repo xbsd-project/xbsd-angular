@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy, Inject, ViewEncapsulation } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Todo } from './todo.model';
+import {Component, OnInit, OnDestroy, Inject, ViewEncapsulation} from '@angular/core';
+import {Router, ActivatedRoute, Params} from '@angular/router';
+import {Todo} from './todo.model';
 
-import { Subscription } from 'rxjs';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-todo',
@@ -20,12 +20,6 @@ export class TodoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // this.router.params
-    //   .pluck('filter')
-    //   .subscribe(filter => {
-    //     this.service.filterTodos(filter);
-    //     this.todos = this.service.todos;
-    //   });
     this.service.getTodosByParams();
     this.onTodosChangedSubscrition = this.service.onTodosChangedSubject.subscribe((todo) => {
       this.todos = todo;

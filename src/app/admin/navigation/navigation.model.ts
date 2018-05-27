@@ -236,7 +236,7 @@ export class NavigationModel {
         'children': [
           {
             'id': 'todo',
-            'title': '任务',
+            'title': '生日记录',
             'type': 'item',
             'url': '/apps/todo/ALL'
           }, {
