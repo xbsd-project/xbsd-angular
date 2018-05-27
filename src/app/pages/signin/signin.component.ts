@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../../core/auth.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {LoginService} from '../../xbsd/services/login.service';
 
 @Component({
   selector: 'app-signin',
@@ -27,11 +27,10 @@ export class SigninComponent implements OnInit {
     }
   };
 
-  constructor(
-    private router: Router,
-    private fb: FormBuilder,
-    private auth: AuthService
-  ) {}
+  constructor(private router: Router,
+              private fb: FormBuilder,
+              private loginService: LoginService,) {
+  }
 
   ngOnInit() {
     this.buildForm();
@@ -43,8 +42,9 @@ export class SigninComponent implements OnInit {
       password: [
         '',
         [
-          Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
-          Validators.minLength(6),
+          // Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
+          Validators.pattern(".*"),
+          Validators.minLength(1),
           Validators.maxLength(25)
         ]
       ]
@@ -76,21 +76,31 @@ export class SigninComponent implements OnInit {
   }
 
   signInWithGoogle() {
-    this.auth.googleLogin().then(() => this.afterSignIn());
+    // pass
+    console.log('sign in with Google');
   }
 
   signInWithGithub() {
-    this.auth.githubLogin().then(() => this.afterSignIn());
+    console.log('sign in with GitHub');
   }
 
   signInWithEmail() {
-    this.auth
-      .emailLogin(this.userForm.value['email'], this.userForm.value['password'])
-      .catch(error => console.log('邮箱登录出错：', error));
+    // this.auth
+    //   .emailLogin(this.userForm.value['email'], this.userForm.value['password'])
+    //   .catch(error => console.log('邮箱登录出错：', error));
+
+    this.loginService.getToken(this.userForm.value['email'], this.userForm.value['password'])
+      .subscribe(landing => {
+          this.router.navigate([landing]);
+        },
+        err => {
+          console.log(err);
+        }
+      );
   }
 
   signInAnonymously() {
-    this.auth.anonymousLogin().then(() => this.afterSignIn());
+    console.log('sign in with Anonymously');
   }
 
   login() {

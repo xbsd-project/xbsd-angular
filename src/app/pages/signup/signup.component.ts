@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {AuthService} from '../../core/auth.service';
 import {RegisterService} from '../../xbsd/services/register.service';
 
 @Component({
@@ -16,8 +15,7 @@ export class SignupComponent implements OnInit {
   passwordConfirm: string;
 
   constructor(private router: Router,
-              private registerService: RegisterService,
-              private auth: AuthService) {
+              private registerService: RegisterService,) {
   }
 
   ngOnInit() {
@@ -26,12 +24,12 @@ export class SignupComponent implements OnInit {
   signUpWithEmail() {
     console.log(this.email, this.password);
 
-    // this.auth.emailSignUp(this.email, this.password).then(() => this.afterSignIn());
+    let that: SignupComponent = this;
 
     this.registerService
       .doRegister(this.email, this.name, this.password)
       .subscribe((json) => {
-          console.log(json);
+        that.afterSignIn();
         },
         err => {
           console.log(err);
@@ -44,6 +42,6 @@ export class SignupComponent implements OnInit {
   }
 
   private afterSignIn() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/signin']);
   }
 }
